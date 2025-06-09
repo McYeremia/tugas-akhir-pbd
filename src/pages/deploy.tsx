@@ -4,6 +4,7 @@ import { useAccount, useWalletClient } from 'wagmi';
 import { ethers } from 'ethers';
 import { deployWarisanDigital } from '../lib/deploy';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import styles from '../styles/Home.module.css';
 
 export default function DeployPage() {
   const { address, isConnected } = useAccount();
@@ -65,22 +66,32 @@ export default function DeployPage() {
           width: '100%',
           backgroundColor: 'white',
           padding: '2rem',
-          borderRadius: '12px',
-          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)',
+          borderRadius: '16px',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.05)',
         }}
       >
-        <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>🚀 Deploy Warisan Digital</h2>
+        <h2
+          style={{
+            textAlign: 'center',
+            marginBottom: '1rem',
+            fontSize: '1.75rem',
+            fontWeight: 700,
+            color: '#0f172a',
+          }}
+        >
+          Deploy Warisan Digital
+        </h2>
 
-        <div style={{ marginBottom: '1rem' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
           <ConnectButton />
           {isConnected && (
-            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem' }}>
+            <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', color: '#475569' }}>
               🔐 Pemberi Waris: <strong>{address}</strong>
             </p>
           )}
         </div>
 
-        <label>Alamat Notaris:</label>
+        <label style={labelStyle}>Alamat Notaris:</label>
         <input
           value={notaris}
           onChange={(e) => setNotaris(e.target.value)}
@@ -88,7 +99,7 @@ export default function DeployPage() {
           style={inputStyle}
         />
 
-        <label>Alamat Saksi:</label>
+        <label style={labelStyle}>Alamat Saksi:</label>
         <input
           value={saksi}
           onChange={(e) => setSaksi(e.target.value)}
@@ -96,7 +107,7 @@ export default function DeployPage() {
           style={inputStyle}
         />
 
-        <label>Alamat Token ERC20:</label>
+        <label style={labelStyle}>Alamat Token ERC20:</label>
         <input
           value={tokenAddress}
           onChange={(e) => setTokenAddress(e.target.value)}
@@ -104,16 +115,16 @@ export default function DeployPage() {
           style={inputStyle}
         />
 
-        <label>Jumlah Token:</label>
+        <label style={labelStyle}>Jumlah Token:</label>
         <input
           value={jumlahToken}
           onChange={(e) => setJumlahToken(e.target.value)}
           type="number"
-          placeholder="1000"
+          placeholder="Desimal, Ex: 10"
           style={inputStyle}
         />
 
-        <label>Waktu Buka (tanggal):</label>
+        <label style={labelStyle}>Waktu Buka (tanggal):</label>
         <input
           value={waktuBuka}
           onChange={(e) => setWaktuBuka(e.target.value)}
@@ -128,13 +139,17 @@ export default function DeployPage() {
             marginTop: '1.5rem',
             width: '100%',
             padding: '0.8rem',
-            backgroundColor: loading ? '#9ca3af' : '#3b82f6',
+            background: loading
+              ? '#94a3b8'
+              : 'linear-gradient(to right, #3b82f6, #0ea5e9)',
             color: 'white',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '10px',
             cursor: loading ? 'not-allowed' : 'pointer',
             fontSize: '1rem',
-            boxShadow: '0 4px 10px rgba(59, 130, 246, 0.3)',
+            fontWeight: 600,
+            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+            transition: 'all 0.3s ease',
           }}
         >
           {loading ? '⏳ Deploying...' : 'Deploy Warisan Digital'}
@@ -146,10 +161,18 @@ export default function DeployPage() {
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  padding: '0.8rem',
+  padding: '0.75rem',
   marginTop: '0.25rem',
-  marginBottom: '1rem',
-  borderRadius: '8px',
-  border: '1px solid #d1d5db',
+  marginBottom: '1.25rem',
+  borderRadius: '10px',
+  border: '1px solid #cbd5e1',
   boxSizing: 'border-box',
+  fontSize: '1rem',
+};
+
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  marginBottom: '0.25rem',
+  color: '#334155',
+  fontWeight: 500,
 };

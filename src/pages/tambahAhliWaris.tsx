@@ -56,23 +56,29 @@ export default function TambahAhliWaris() {
       <div
         style={{
           width: '100%',
-          maxWidth: '500px',
-          backgroundColor: '#fff',
+          maxWidth: '600px',
+          backgroundColor: '#ffffff',
           padding: '2rem',
-          borderRadius: '12px',
-          boxShadow: '0 10px 20px rgba(0,0,0,0.08)',
+          borderRadius: '16px',
+          boxShadow: '0 10px 30px rgba(0, 0, 0, 0.05)',
         }}
       >
-        <h2 style={{ textAlign: 'center', marginBottom: '1.5rem' }}>👥 Tambah Ahli Waris</h2>
+        <h2
+          style={{
+            textAlign: 'center',
+            marginBottom: '1.5rem',
+            fontSize: '1.75rem',
+            fontWeight: 700,
+            color: '#0f172a',
+          }}
+        >
+          👥 Tambah Ahli Waris
+        </h2>
 
-        <label>Alamat Kontrak:</label>
-        <input
-          value={contractAddress}
-          readOnly
-          style={inputStyle}
-        />
+        <label style={labelStyle}>Alamat Kontrak:</label>
+        <input value={contractAddress} readOnly style={inputStyle} />
 
-        <label>Alamat Ahli Waris:</label>
+        <label style={labelStyle}>Alamat Ahli Waris:</label>
         <input
           placeholder="0x..."
           value={ahliWaris}
@@ -80,9 +86,9 @@ export default function TambahAhliWaris() {
           style={inputStyle}
         />
 
-        <label>Bagian Token (desimal):</label>
+        <label style={labelStyle}>Bagian Token :</label>
         <input
-          placeholder="Contoh: 10"
+          placeholder="Desimal, Ex: 10"
           type="number"
           value={bagian}
           onChange={(e) => setBagian(e.target.value)}
@@ -96,13 +102,15 @@ export default function TambahAhliWaris() {
             marginTop: '1.5rem',
             width: '100%',
             padding: '0.9rem',
-            backgroundColor: loading ? '#9ca3af' : '#10b981',
-            color: '#fff',
+            backgroundColor: loading ? '#93c5fd' : '#3b82f6',
+            color: '#ffffff',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '12px',
             cursor: loading ? 'not-allowed' : 'pointer',
             fontSize: '1rem',
-            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.4)',
+            fontWeight: 600,
+            boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
+            transition: 'all 0.3s ease',
           }}
         >
           {loading ? '⏳ Menambahkan...' : 'Tambah Ahli Waris'}
@@ -114,11 +122,18 @@ export default function TambahAhliWaris() {
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  padding: '0.8rem',
+  padding: '0.75rem',
   marginTop: '0.25rem',
-  marginBottom: '1rem',
-  borderRadius: '8px',
-  border: '1px solid #d1d5db',
-  fontSize: '1rem',
+  marginBottom: '1.25rem',
+  borderRadius: '10px',
+  border: '1px solid #cbd5e1',
   boxSizing: 'border-box',
+  fontSize: '1rem',
+};
+
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  marginBottom: '0.25rem',
+  color: '#334155',
+  fontWeight: 500,
 };

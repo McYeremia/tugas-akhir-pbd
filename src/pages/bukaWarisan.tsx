@@ -80,24 +80,34 @@ export default function BukaWarisan() {
         style={{
           maxWidth: '600px',
           width: '100%',
-          backgroundColor: '#fff',
-          borderRadius: '12px',
+          backgroundColor: 'white',
           padding: '2rem',
-          boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+          borderRadius: '16px',
+          boxShadow: '0 4px 24px rgba(0, 0, 0, 0.05)',
         }}
       >
-        <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>🗝️ Buka Warisan Digital</h1>
-        <ConnectButton />
+        <h2
+          style={{
+            textAlign: 'center',
+            marginBottom: '1rem',
+            fontSize: '1.75rem',
+            fontWeight: 700,
+            color: '#0f172a',
+          }}
+        >
+          🗝️ Buka Warisan Digital
+        </h2>
 
+        <ConnectButton />
         {isConnected && (
           <>
-            <div style={{ marginTop: '1.5rem', lineHeight: '1.6' }}>
+            <div style={{ marginTop: '1.5rem', lineHeight: '1.7', fontSize: '0.95rem', color: '#334155' }}>
               <p><strong>📌 Wallet Anda:</strong> {address}</p>
               <p><strong>🔏 Notaris:</strong> {notaris}</p>
               <p><strong>📅 Waktu Buka:</strong> {new Date(waktuBuka * 1000).toLocaleString()}</p>
               <p>
                 <strong>🔐 Status:</strong>{' '}
-                <span style={{ color: warisanDibuka ? '#10b981' : '#f59e0b' }}>
+                <span style={{ color: warisanDibuka ? '#10b981' : '#f59e0b', fontWeight: 600 }}>
                   {warisanDibuka ? '✅ Sudah Dibuka' : '🔒 Belum Dibuka'}
                 </span>
               </p>
@@ -110,13 +120,15 @@ export default function BukaWarisan() {
                 marginTop: '2rem',
                 width: '100%',
                 padding: '0.9rem',
-                backgroundColor: loading || warisanDibuka ? '#9ca3af' : '#3b82f6',
-                color: '#fff',
+                backgroundColor: loading || warisanDibuka ? '#94a3b8' : '#3b82f6',
+                color: 'white',
                 border: 'none',
-                borderRadius: '8px',
+                borderRadius: '10px',
                 cursor: loading || warisanDibuka ? 'not-allowed' : 'pointer',
                 fontSize: '1rem',
-                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
+                fontWeight: 600,
+                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.3)',
+                transition: 'all 0.3s ease',
               }}
             >
               {loading ? '⏳ Memproses...' : 'Buka Warisan'}
