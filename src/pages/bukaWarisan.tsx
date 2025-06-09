@@ -62,37 +62,81 @@ export default function BukaWarisan() {
     }
   };
 
-  const sudahLewatWaktu = () => {
-    return Date.now() / 1000 >= waktuBuka;
-  };
-
-  const isNotaris = () => {
-    return address?.toLowerCase() === notaris.toLowerCase();
-  };
+  const sudahLewatWaktu = () => Date.now() / 1000 >= waktuBuka;
+  const isNotaris = () => address?.toLowerCase() === notaris.toLowerCase();
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>🗝️ Buka Warisan Digital</h1>
-      <ConnectButton />
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#f9fafb',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2rem',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '600px',
+          width: '100%',
+          backgroundColor: '#fff',
+          borderRadius: '12px',
+          padding: '2rem',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.08)',
+        }}
+      >
+        <h1 style={{ textAlign: 'center', marginBottom: '1rem' }}>🗝️ Buka Warisan Digital</h1>
+        <ConnectButton />
 
-      {isConnected && (
-        <>
-          <p><strong>Alamat Wallet:</strong> {address}</p>
-          <p><strong>Notaris:</strong> {notaris}</p>
-          <p><strong>Waktu Buka:</strong> {new Date(waktuBuka * 1000).toLocaleString()}</p>
-          <p><strong>Status:</strong> {warisanDibuka ? '✅ Sudah Dibuka' : '🔒 Belum Dibuka'}</p>
+        {isConnected && (
+          <>
+            <div style={{ marginTop: '1.5rem', lineHeight: '1.6' }}>
+              <p><strong>📌 Wallet Anda:</strong> {address}</p>
+              <p><strong>🔏 Notaris:</strong> {notaris}</p>
+              <p><strong>📅 Waktu Buka:</strong> {new Date(waktuBuka * 1000).toLocaleString()}</p>
+              <p>
+                <strong>🔐 Status:</strong>{' '}
+                <span style={{ color: warisanDibuka ? '#10b981' : '#f59e0b' }}>
+                  {warisanDibuka ? '✅ Sudah Dibuka' : '🔒 Belum Dibuka'}
+                </span>
+              </p>
+            </div>
 
-          <button
-            disabled={!isNotaris() || !sudahLewatWaktu() || warisanDibuka || loading}
-            onClick={handleBukaWarisan}
-            style={{ marginTop: '1rem' }}
-          >
-            {loading ? 'Memproses...' : 'Buka Warisan'}
-          </button>
+            <button
+              disabled={!isNotaris() || !sudahLewatWaktu() || warisanDibuka || loading}
+              onClick={handleBukaWarisan}
+              style={{
+                marginTop: '2rem',
+                width: '100%',
+                padding: '0.9rem',
+                backgroundColor: loading || warisanDibuka ? '#9ca3af' : '#3b82f6',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '8px',
+                cursor: loading || warisanDibuka ? 'not-allowed' : 'pointer',
+                fontSize: '1rem',
+                boxShadow: '0 4px 12px rgba(59, 130, 246, 0.4)',
+              }}
+            >
+              {loading ? '⏳ Memproses...' : 'Buka Warisan'}
+            </button>
 
-          {pesan && <p style={{ marginTop: '1rem', color: pesan.startsWith('✅') ? 'green' : 'red' }}>{pesan}</p>}
-        </>
-      )}
+            {pesan && (
+              <p
+                style={{
+                  marginTop: '1rem',
+                  textAlign: 'center',
+                  color: pesan.startsWith('✅') ? '#10b981' : '#ef4444',
+                  fontWeight: 500,
+                }}
+              >
+                {pesan}
+              </p>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
