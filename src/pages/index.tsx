@@ -126,6 +126,7 @@
 //   );
 // }
 
+import { useRouter } from 'next/router';
 
 import { useState } from 'react';
 import { useAccount, useWalletClient } from 'wagmi';
@@ -143,6 +144,9 @@ export default function Home() {
   const [jumlahToken, setJumlahToken] = useState('');
   const [waktuBuka, setWaktuBuka] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
 
   const handleDeploy = async () => {
     if (!walletClient || !window.ethereum) return alert('Wallet belum terhubung');
@@ -165,9 +169,11 @@ export default function Home() {
       );
 
       alert(`✅ Kontrak berhasil dideploy di: ${contractAddress}`);
+      router.push(`/tambahAhliWaris?kontrak=${contractAddress}`);
     } catch (err) {
       console.error(err);
       alert('❌ Gagal mendeploy kontrak');
+    
     } finally {
       setLoading(false);
     }
